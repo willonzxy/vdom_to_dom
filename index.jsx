@@ -2,14 +2,14 @@
  * @Author: willon 
  * @Date: 2018-09-21 10:04:06 
  * @Last Modified by: willon tel:13189679384
- * @Last Modified time: 2018-09-21 12:35:11
+ * @Last Modified time: 2018-09-21 12:58:04
  */
 function create_virtual_dom_by_jsx(){
     return (
-        <ul id="filmList" className="list">
-            <li className="main">Detective Chinatown Vol 2</li>
-            <li>Ferdinand</li>
-            <li>Paddington 2</li>
+        <ul id="list" className="list">
+            <li className="main">肖申克的救赎</li>
+            <li>阿甘正传</li>
+            <li>盗梦空间</li>
         </ul>
     )
 }
@@ -34,10 +34,10 @@ function render(dom) {
     dom.appendChild(createElement(create_virtual_dom_by_jsx())); // 记住view()
 }
 
-function createElement(vdom) {
-    var node = document.createElement(vdom.type); // 创建元素
-    setAttr(node, vdom.props); // 设置属性
-    Array.isArray(vdom.children) && vdom.children.forEach( element => { // 有子元素就递归渲染
+function createElement({type,props,children}) {
+    let node = document.createElement(type); // 创建元素
+    props && setAttr(node, props); // 设置属性
+    Array.isArray(children) && children.forEach( element => { // 有子元素就递归渲染
         if( typeof element === 'string'){
             node.appendChild(document.createTextNode(element))
         }else{
